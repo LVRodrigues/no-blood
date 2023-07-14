@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">No Blood</string>
+    <string name="app_name">Sem Sangue</string>
+    <string name="info">Sou Testemunha de Jeová, e não aceito NENHUMA TRANSFUSÃO de sangue total, glóbulos vermelhos, glóbulos brancos, plaquetas ou plasma em nenhuma circunstância, mesmo que os profissionais de saúde opinem que isso seja necessário para a manutenção da minha vida. (Atos 15:28, 29) Recuso-me a fazer doações antecipadas e a armazenar meu sangue para posterior infusão.</string>
+    <string name="personal">Meu nome é $NAME$. Se estou inconciente, por favor, entre em contato com:</string>
 </resources>
