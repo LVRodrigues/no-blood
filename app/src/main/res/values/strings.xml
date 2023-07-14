@@ -5,7 +5,7 @@
 
     <string name="settings_personal_title">Dados Pessoais</string>
     <string name="settings_personal_name">Nome</string>
-    <string name="settings_empty_sample">Informar</string>
+    <string name="settings_empty_sample">[Informar]</string>
 
     <string name="settings_attorney_principal_title">Procurador Principal</string>
     <string name="settings_attorney_secondary_title">Procurador Secundário</string>

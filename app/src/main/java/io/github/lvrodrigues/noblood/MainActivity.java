@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void personalUpdate() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = sharedPreferences.getString("name", "");
+        String name = sharedPreferences.getString("name", getString(R.string.settings_empty_sample));
         TextView personal = findViewById(R.id.personal);
         String text = getString(R.string.personal);
         text = text.replace("$NAME$", name);

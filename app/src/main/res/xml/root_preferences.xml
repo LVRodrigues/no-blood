@@ -19,19 +19,17 @@
             android:title="@string/settings_attorney_enabled"
             app:iconSpaceReserved="false" />
         <EditTextPreference
-            app:defaultValue="@string/settings_empty_sample"
             android:key="attorney_principal_name"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
             android:title="@string/settings_attorney_name"
-            app:iconSpaceReserved="false" />
-        <EditTextPreference
             app:defaultValue="@string/settings_empty_sample"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
             android:key="attorney_principal_phone"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
             android:title="@string/settings_attorney_phone"
-            app:iconSpaceReserved="false" />
+            app:defaultValue="@string/settings_empty_sample"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_attorney_secondary_title"
@@ -44,16 +42,14 @@
         <EditTextPreference
             app:defaultValue="@string/settings_empty_sample"
             android:key="attorney_secondary_name"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
             android:title="@string/settings_attorney_name"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
         <EditTextPreference
-            app:defaultValue="@string/settings_empty_sample"
             android:key="attorney_secondary_phone"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
             android:title="@string/settings_attorney_phone"
-            app:iconSpaceReserved="false" />
+            app:defaultValue="@string/settings_empty_sample"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 </PreferenceScreen>
