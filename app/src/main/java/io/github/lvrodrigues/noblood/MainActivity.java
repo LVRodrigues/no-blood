@@ -3,6 +3,7 @@ package io.github.lvrodrigues.noblood;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(settings);
         });
 
+        TextView info = findViewById(R.id.info);
+        info.setText(Html.fromHtml(getString(R.string.info), Html.FROM_HTML_MODE_LEGACY));
+
         personalUpdate();
     }
 
@@ -38,6 +42,6 @@ public class MainActivity extends AppCompatActivity {
         TextView personal = findViewById(R.id.personal);
         String text = getString(R.string.personal);
         text = text.replace("$NAME$", name);
-        personal.setText(text);
+        personal.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
     }
 }
