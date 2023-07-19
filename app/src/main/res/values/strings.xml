@@ -15,4 +15,6 @@
     <string name="settings_attorney_phone">Telefone</string>
 
     <string name="title_activity_settings">Configuração</string>
+    <string name="image_blood_transfusion_forbidden">Imagem Proibido Tranfusão de Sangue</string>
+    <string name="buttonConfig">Configurar</string>
 </resources>
