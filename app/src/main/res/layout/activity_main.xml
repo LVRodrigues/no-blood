@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,6 +53,7 @@
                 android:id="@+id/info"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:text="@string/info"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -61,6 +63,8 @@
                 android:id="@+id/personal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0"
                 android:text="@string/personal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -68,6 +72,8 @@
                 android:id="@+id/attorney_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0"
                 android:text="@string/attorney"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -75,6 +81,8 @@
                 android:id="@+id/attorney_alternative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0"
                 android:text="@string/attorney"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         </LinearLayout>
