@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Sem Sangue</string>
+
     <string name="info"><![CDATA[Sou Testemunha de Jeová, e <b>não aceito NENHUMA TRANSFUSÃO de sangue</b> total, glóbulos vermelhos, glóbulos brancos, plaquetas ou plasma em nenhuma circunstância, mesmo que os profissionais de saúde opinem que isso seja necessário para a manutenção da minha vida. (Atos 15:28, 29) Recuso-me a fazer doações antecipadas e a armazenar meu sangue para posterior infusão]]>.</string>
     <string name="personal"><![CDATA[Meu nome é <b>$NAME$</b>. Se eu não estou apto a me expressar, por favor, entre em contato com:]]></string>
-    <string name="attorney">$NAME$, no telefone $PHONE$.</string>
+    <string name="attorney"><![CDATA[- <b>$NAME$</b>, no telefone <b>$PHONE$</b>.]]></string>
 
     <string name="settings_personal_title">Dados Pessoais</string>
     <string name="settings_personal_name">Nome</string>
@@ -15,4 +16,6 @@
     <string name="settings_attorney_phone">Telefone</string>
 
     <string name="title_activity_settings">Configuração</string>
+    <string name="image_blood_transfusion_forbidden">Imagem Proibido Tranfusão de Sangue</string>
+    <string name="buttonConfig">Configurar</string>
 </resources>
