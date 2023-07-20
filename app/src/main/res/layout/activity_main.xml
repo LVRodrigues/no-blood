@@ -71,4 +71,26 @@
         app:srcCompat="@android:drawable/ic_menu_edit"
         android:focusable="true" />
 
+    <TextView
+        android:id="@+id/attorney_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/attorney"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/personal" />
+
+    <TextView
+        android:id="@+id/attorney_alternative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/attorney"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attorney_main" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
