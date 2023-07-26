@@ -18,4 +18,7 @@
     <string name="title_activity_settings">Configuração</string>
     <string name="image_blood_transfusion_forbidden">Imagem Proibido Tranfusão de Sangue</string>
     <string name="buttonConfig">Configurar</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
