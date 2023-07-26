@@ -13,7 +13,7 @@ public class MainWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         CharSequence widgetText = context.getString(R.string.app_name);
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.main_widget);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_main);
         views.setTextViewText(R.id.widgetAppName, widgetText);
         views.setImageViewResource(R.id.widgetImage, R.drawable.no_blood);
         appWidgetManager.updateAppWidget(appWidgetId, views);
