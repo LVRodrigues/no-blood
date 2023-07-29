@@ -87,6 +87,20 @@
                 android:layout_weight="0"
                 android:text="@string/attorney"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startService"
+                android:text="@string/main_service_start" />
+
+            <Button
+                android:id="@+id/finish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="stopService"
+                android:text="@string/main_service_finish" />
         </LinearLayout>
     </ScrollView>
 
