@@ -42,6 +42,7 @@ public class NoBloodService extends Service {
                     .setContentIntent(pendingIntent)
                     .setTicker(getText(R.string.app_name))
                     .setVisibility(Notification.VISIBILITY_PUBLIC)
+                    .setShowWhen(false)
                     .setOngoing(true);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 builder = builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
