@@ -36,23 +36,19 @@ public class NoBloodService extends Service {
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
-        Notification notification = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Notification.Builder builder = new Notification.Builder(this, NoBloodApplication.CHANNEL_ID)
-                    .setContentTitle(getText(R.string.app_name))
-                    .setContentText(getText(R.string.notification_message))
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentIntent(pendingIntent)
-                    .setTicker(getText(R.string.app_name))
-                    .setVisibility(Notification.VISIBILITY_PUBLIC)
-                    .setShowWhen(false)
-                    .setOngoing(true);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                builder = builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
-            }
-            notification = builder.build();
+        Notification.Builder builder = new Notification.Builder(this, NoBloodApplication.CHANNEL_ID)
+                .setContentTitle(getText(R.string.app_name))
+                .setContentText(getText(R.string.notification_message))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pendingIntent)
+                .setTicker(getText(R.string.app_name))
+                .setVisibility(Notification.VISIBILITY_PUBLIC)
+                .setShowWhen(false)
+                .setOngoing(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            builder = builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
         }
-        startForeground(ONGOING_NOTIFICATION_ID, notification);
+        startForeground(ONGOING_NOTIFICATION_ID, builder.build());
     }
 
     @Override
