@@ -61,33 +61,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 tools:ignore="VisualLintLongText" />
 
-            <TextView
-                android:id="@+id/personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_weight="0"
-                android:text="@string/personal"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/attorney_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_weight="0"
-                android:text="@string/attorney"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/attorney_alternative"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_weight="0"
-                android:text="@string/attorney"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
             <Button
                 android:id="@+id/start"
                 android:layout_width="match_parent"
@@ -103,19 +76,5 @@
                 android:text="@string/main_service_finish" />
         </LinearLayout>
     </ScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/config"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:contentDescription="@string/buttonConfig"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_edit"
-        tools:ignore="VisualLintBounds" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,10 @@
 package io.github.lvrodrigues.noblood;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
@@ -24,9 +26,10 @@ public class NoBloodService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(LOGTAG, "NoBloodService inicializando...");
+        int result = super.onStartCommand(intent, flags, startId);
+        Log.d(LOGTAG, "NoBloodService inicializando... (" +  result + ")");
         notifyServiceRunning();
-        return START_REDELIVER_INTENT; // super.onStartCommand(intent, flags, startId);
+        return START_REDELIVER_INTENT;
     }
 
     private void notifyServiceRunning() {

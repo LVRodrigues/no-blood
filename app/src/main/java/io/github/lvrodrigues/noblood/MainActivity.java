@@ -1,95 +1,70 @@
 package io.github.lvrodrigues.noblood;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE = 11000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton config = findViewById(R.id.config);
-        config.setOnClickListener(view -> {
-            Intent settings = new Intent(view.getContext(), SettingsActivity.class);
-            startActivity(settings);
-        });
-
         TextView info = findViewById(R.id.info);
         info.setText(Html.fromHtml(getString(R.string.info), Html.FROM_HTML_MODE_LEGACY));
+    }
 
-        personalUpdate();
-        attorneyMainUpdate();
-        attorneyAlternativeUpdate();
+    private void startServiceExecute() {
+        Snackbar snack = Snackbar.make(this.findViewById(android.R.id.content), R.string.main_service_starting, BaseTransientBottomBar.LENGTH_SHORT);
+        snack.show();
+        Intent service = new Intent(this, NoBloodService.class);
+        startForegroundService(service);
+    }
+
+    public void startService(View view) {
+        if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            startServiceExecute();
+        } else {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(getText(R.string.request_notification_title));
+                builder.setMessage(getText(R.string.request_notification_message));
+                builder.setPositiveButton(R.string.yes, (dialog, which) -> requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE));
+                builder.setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss());
+                builder.show();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+            }
+        }
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        personalUpdate();
-        attorneyMainUpdate();
-        attorneyAlternativeUpdate();
-    }
-
-    private void personalUpdate() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = sharedPreferences.getString("name", getString(R.string.settings_empty_sample));
-        TextView personal = findViewById(R.id.personal);
-        String text = getString(R.string.personal);
-        text = text.replace("$NAME$", name);
-        personal.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
-    }
-
-    private void attorneyMainUpdate() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = sharedPreferences.getBoolean("attorney_main_enabled", false);
-        TextView view = findViewById(R.id.attorney_main);
-        if (enabled) {
-            String name = sharedPreferences.getString("attorney_main_name", "");
-            String phone = sharedPreferences.getString("attorney_main_phone", "");
-            String text = getString(R.string.attorney);
-            text = text.replace("$NAME$", name);
-            text = text.replace("$PHONE$", phone);
-            view.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            view.setText("");
-        }
-    }
-
-    private void attorneyAlternativeUpdate() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = sharedPreferences.getBoolean("attorney_alternative_enabled", false);
-        TextView view = findViewById(R.id.attorney_alternative);
-        if (enabled) {
-            String name = sharedPreferences.getString("attorney_alternative_name", "");
-            String phone = sharedPreferences.getString("attorney_alternative_phone", "");
-            String text = getString(R.string.attorney);
-            text = text.replace("$NAME$", name);
-            text = text.replace("$PHONE$", phone);
-            view.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            view.setText("");
-        }
-    }
-
-
-    public void startService(View view) {
-        Intent service = new Intent(this, NoBloodService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(service);
-        } else {
-            startService(service);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startServiceExecute();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(getText(R.string.request_notification_title));
+                builder.setMessage(getText(R.string.request_notification_failure));
+                builder.setNegativeButton(R.string.ok, (dialog, which) -> dialog.dismiss());
+                builder.show();
+            }
         }
     }
 
