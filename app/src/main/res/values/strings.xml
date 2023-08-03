@@ -13,6 +13,11 @@
     <string name="request_notification_title">Permissão de Notificação</string>
     <string name="request_notification_message">O serviço de notificação é necessário para apresentar as informações de saúde na tela de bloqueio. Também permitirá o uso do aplicativo de Emergência. Deseja permitir a funcionalidade?</string>
     <string name="request_notification_failure">O serviço não funcionará na tela de bloqueio sem a permissão de Notificação. Deseja abrir as configurações?</string>
+    <string name="request_boot_completed_title">Permissão de Início Automático</string>
+    <string name="request_boot_completed_failure">O serviço não irá reiniciar quando o aparelho for ligado.</string>
+    <string name="request_boot_completed_success">Permissão de início automáticio concedida.</string>
+    <string name="request_boot_completed_message">O serviço reiniciará automaticamente quando o aparelho for ligado. Deseja permitir a funcionalidade?</string>
+
     <string name="image_blood_transfusion_forbidden">Imagem Proibido Tranfusão de Sangue</string>
 
     <string name="appwidget_text">Sem Sangue</string>
