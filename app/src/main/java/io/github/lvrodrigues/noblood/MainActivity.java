@@ -4,20 +4,24 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE = 11000;
+    private static final int REQUEST_NOTIFICATION_CODE = 11000;
+    private static final int REQUEST_BOOT_COMPLETED_CODE = 12000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +40,66 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startService(View view) {
+        verifyAndRequestBootCompleted();
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+        if (manager.areNotificationsEnabled()) {
+            startServiceExecute();
+        } else {
+            verifyAndRequestNotificationPermission();
+        }
+    }
+
+    private void verifyAndRequestBootCompleted() {
+        if (checkSelfPermission(Manifest.permission.RECEIVE_BOOT_COMPLETED) != PackageManager.PERMISSION_GRANTED) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.RECEIVE_BOOT_COMPLETED)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.request_boot_completed_title);
+                builder.setMessage(R.string.request_boot_completed_message);
+                builder.setPositiveButton(R.string.yes, (dialog, which) -> requestPermissions(new String[]{Manifest.permission.RECEIVE_BOOT_COMPLETED}, REQUEST_BOOT_COMPLETED_CODE));
+                builder.setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss());
+                builder.show();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.RECEIVE_BOOT_COMPLETED}, REQUEST_BOOT_COMPLETED_CODE);
+            }
+        }
+    }
+
+    private void verifyAndRequestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            verifyAndRequestNotificationTiramisu();
+        } else {
+            verifyAndRequestNotificationLegacy();
+        }
+    }
+
+    private void verifyAndRequestNotificationLegacy() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.request_notification_title);
+        builder.setMessage(R.string.request_notification_message);
+        builder.setPositiveButton("Sim", (dialog, which) -> showNotificationIntentSettings());
+        builder.setNegativeButton("Não", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
+    private void showNotificationIntentSettings() {
+        Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+        startActivity(intent);
+    }
+
+    private void verifyAndRequestNotificationTiramisu() {
         if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
             startServiceExecute();
         } else {
             if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(getText(R.string.request_notification_title));
-                builder.setMessage(getText(R.string.request_notification_message));
-                builder.setPositiveButton(R.string.yes, (dialog, which) -> requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE));
+                builder.setTitle(R.string.request_notification_title);
+                builder.setMessage(R.string.request_notification_message);
+                builder.setPositiveButton(R.string.yes, (dialog, which) -> requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_NOTIFICATION_CODE));
                 builder.setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss());
                 builder.show();
             } else {
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_NOTIFICATION_CODE);
             }
         }
     }
@@ -55,15 +107,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == REQUEST_NOTIFICATION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startServiceExecute();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(getText(R.string.request_notification_title));
-                builder.setMessage(getText(R.string.request_notification_failure));
-                builder.setNegativeButton(R.string.ok, (dialog, which) -> dialog.dismiss());
+                builder.setTitle(R.string.request_notification_title);
+                builder.setMessage(R.string.request_notification_failure);
+                builder.setPositiveButton("Sim", (dialog, which) -> showNotificationIntentSettings());
+                builder.setNegativeButton("Não", (dialog, which) -> dialog.dismiss());
                 builder.show();
+            }
+        }
+        if (requestCode == REQUEST_BOOT_COMPLETED_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Snackbar snack = Snackbar.make(this.findViewById(android.R.id.content), R.string.request_boot_completed_success, BaseTransientBottomBar.LENGTH_SHORT);
+                snack.show();
+            } else {
+                Snackbar snack = Snackbar.make(this.findViewById(android.R.id.content), R.string.request_boot_completed_failure, BaseTransientBottomBar.LENGTH_SHORT);
+                snack.show();
             }
         }
     }
