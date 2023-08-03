@@ -1,18 +1,19 @@
 <resources>
     <string name="app_name">Sem Sangue</string>
-    <string name="info"><![CDATA[Sou Testemunha de Jeová, e <b>não aceito NENHUMA TRANSFUSÃO de sangue</b> total, glóbulos vermelhos, glóbulos brancos, plaquetas ou plasma em nenhuma circunstância, mesmo que os profissionais de saúde opinem que isso seja necessário para a manutenção da minha vida. (Atos 15:28, 29) Recuso-me a fazer doações antecipadas e a armazenar meu sangue para posterior infusão]]>.</string>
+    <string name="info"><![CDATA[Sou Testemunha de Jeová, e <b>não aceito NENHUMA TRANSFUSÃO de sangue</b> total, glóbulos vermelhos, glóbulos brancos, plaquetas ou plasma em nenhuma circunstância, mesmo que os profissionais de saúde opinem que isso seja necessário para a manutenção da minha vida. (Atos 15:28, 29) Recuso-me a fazer doações antecipadas e a armazenar meu sangue para posterior infusão.]]></string>
 
     <string name="channel_name">Sem Sangue</string>
     <string name="channel_description">Canal de notificações para apresentar informações especiais na tela de bloqueio.</string>
-    <string name="notification_message">Por fovar, NÃO aplique sangue!"</string>
-
+    <string name="notification_message">Por fovar, NÃO aplique sangue!</string>
 
     <string name="main_service_start">Iniciar Notificação</string>
     <string name="main_service_starting">Iniciando serviço de notificação...</string>
     <string name="main_service_finish">Finalizar Notificação</string>
+
     <string name="request_notification_title">Permissão de Notificação</string>
     <string name="request_notification_message">O serviço de notificação é necessário para apresentar as informações de saúde na tela de bloqueio. Também permitirá o uso do aplicativo de Emergência. Deseja permitir a funcionalidade?</string>
     <string name="request_notification_failure">O serviço não funcionará na tela de bloqueio sem a permissão de Notificação. Deseja abrir as configurações?</string>
+
     <string name="request_boot_completed_title">Permissão de Início Automático</string>
     <string name="request_boot_completed_failure">O serviço não irá reiniciar quando o aparelho for ligado.</string>
     <string name="request_boot_completed_success">Permissão de início automáticio concedida.</string>
@@ -26,5 +27,5 @@
 
     <string name="yes">Sim</string>
     <string name="no">Não</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
 </resources>
