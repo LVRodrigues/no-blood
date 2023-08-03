@@ -4,7 +4,7 @@
 
     <string name="channel_name">Sem Sangue</string>
     <string name="channel_description">Canal de notificações para apresentar informações especiais na tela de bloqueio.</string>
-    <string name="notification_message">Por fovar, não aplique sangue!"</string>
+    <string name="notification_message">Por fovar, NÃO aplique sangue!"</string>
 
 
     <string name="main_service_start">Iniciar Notificação</string>

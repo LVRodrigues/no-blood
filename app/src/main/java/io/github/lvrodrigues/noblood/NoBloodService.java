@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
@@ -40,10 +41,12 @@ public class NoBloodService extends Service {
                 .setContentTitle(getText(R.string.app_name))
                 .setContentText(getText(R.string.notification_message))
                 .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.no_blood))
                 .setContentIntent(pendingIntent)
                 .setTicker(getText(R.string.app_name))
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .setShowWhen(false)
+                .setAutoCancel(false)
                 .setOngoing(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             builder = builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
