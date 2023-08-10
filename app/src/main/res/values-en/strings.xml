@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">No Blood</string>
+    <string name="info"><![CDATA[I am a Jehovah\'s Witness, and <b>I do not accept ANY TRANSFUSION of whole blood</b>, red blood cells, white blood cells, platelets or plasma under any circumstances, even if healthcare professionals feel it is necessary for the maintenance of my life. (Acts 15:28, 29) I refuse to make advance donations and refuse to store my blood for later infusion.]]></string>
+
+    <string name="channel_name">No Blood</string>
+    <string name="channel_description">Notification channel to display special information on the lock screen.</string>
+    <string name="notification_message">Please DO NOT apply blood!</string>
+
+    <string name="main_service_start">Start Notification</string>
+    <string name="main_service_starting">Starting notification service...</string>
+    <string name="main_service_finish">End Notification</string>
+
+    <string name="request_notification_title">Notification Permission</string>
+    <string name="request_notification_message">Notification service is required to display health information on lock screen. It will also allow the use of the Emergency application. Do you want to allow the feature?</string>
+    <string name="request_notification_failure">Service will not work on lock screen without Notification permission. Do you want to open settings?</string>
+
+    <string name="request_boot_completed_title">Auto Start Permission</string>
+    <string name="request_boot_completed_failure">The service will not restart when the device is turned on.</string>
+    <string name="request_boot_completed_success">Autostart permission granted.</string>
+    <string name="request_boot_completed_message">The service will restart automatically when the device is turned on. Do you want to allow the feature?</string>
+
+    <string name="image_blood_transfusion_forbidden">Image Forbidden Blood Transfusion</string>
+
+    <string name="appwidget_text">No Blood</string>
+    <string name="add_widget">Add Information</string>
+    <string name="app_widget_description">Health information.</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>
