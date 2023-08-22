@@ -23,6 +23,7 @@ public class NoBloodApplication extends Application {
                 NotificationManager.IMPORTANCE_HIGH);
         channel.setDescription(getString(R.string.channel_description));
         channel.enableVibration(false);
+        channel.setSound(null, null);
         channel.setShowBadge(false);
         channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
         NotificationManager manager = getSystemService(NotificationManager.class);

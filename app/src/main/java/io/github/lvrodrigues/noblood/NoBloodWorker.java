@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.work.Data;
 import androidx.work.ForegroundInfo;
 import androidx.work.ListenableWorker;
 import androidx.work.WorkerParameters;
@@ -43,10 +44,18 @@ public class NoBloodWorker extends ListenableWorker {
     @NonNull
     @Override
     public ListenableFuture<Result> startWork() {
+        Log.d(LOGTAG, "Sinalizando como tarefa de longa duração.");
+        setForegroundAsync(createForegroundInfo());
+
         Log.d(LOGTAG, "Inicializando o serviço em segundo plano.");
         ListenableFuture<Result> future = executor.submit(() -> {
+            int value = 0;
             while (!isStopped()) {
-                Log.v(LOGTAG, "Processando...");
+                value += 1;
+                value = (value % 100);
+                Data data = new Data.Builder().putInt("progress", value).build();
+                setProgressAsync(data);
+                Log.v(LOGTAG, "Processando... (" + value + ")");
                 Thread.sleep(1 * 1000 * 60);
             }
             return Result.success();
@@ -67,9 +76,6 @@ public class NoBloodWorker extends ListenableWorker {
             }
         }, executor);
 
-        Log.d(LOGTAG, "Sinalizando como tarefa de longa duração.");
-        setForegroundAsync(createForegroundInfo());
-
         Log.d(LOGTAG, "Retornando objeto futuro...");
         return resultFuture;
     }
@@ -81,7 +87,7 @@ public class NoBloodWorker extends ListenableWorker {
                 .setContentTitle(context.getText(R.string.app_name))
                 .setContentText(context.getText(R.string.notification_message))
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.no_blood))
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher_foreground))
                 .setTicker(context.getText(R.string.app_name))
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setShowWhen(false)
