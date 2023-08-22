@@ -5,6 +5,11 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 
+import androidx.work.Configuration;
+import androidx.work.WorkManager;
+
+import java.util.concurrent.Executors;
+
 public class NoBloodApplication extends Application {
 
     public static final String CHANNEL_ID   = "NoBloodServiceChannel";
