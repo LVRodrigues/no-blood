@@ -5,6 +5,11 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 
+import androidx.work.Configuration;
+import androidx.work.WorkManager;
+
+import java.util.concurrent.Executors;
+
 public class NoBloodApplication extends Application {
 
     public static final String CHANNEL_ID   = "NoBloodServiceChannel";
@@ -18,6 +23,7 @@ public class NoBloodApplication extends Application {
                 NotificationManager.IMPORTANCE_HIGH);
         channel.setDescription(getString(R.string.channel_description));
         channel.enableVibration(false);
+        channel.setSound(null, null);
         channel.setShowBadge(false);
         channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
         NotificationManager manager = getSystemService(NotificationManager.class);

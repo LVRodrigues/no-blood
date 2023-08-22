@@ -14,6 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -21,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_NOTIFICATION_CODE = 11000;
-    private static final int REQUEST_BOOT_COMPLETED_CODE = 12000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,32 +37,17 @@ public class MainActivity extends AppCompatActivity {
     private void startServiceExecute() {
         Snackbar snack = Snackbar.make(this.findViewById(android.R.id.content), R.string.main_service_starting, BaseTransientBottomBar.LENGTH_SHORT);
         snack.show();
-        Intent service = new Intent(this, NoBloodService.class);
-        startForegroundService(service);
+        // TODO Iniciar notificação em segundo plano.
+        WorkRequest request = new OneTimeWorkRequest.Builder(NoBloodWorker.class).build();
+        WorkManager.getInstance(this.getApplicationContext()).enqueue(request);
     }
 
     public void startService(View view) {
-        verifyAndRequestBootCompleted();
         NotificationManagerCompat manager = NotificationManagerCompat.from(this);
         if (manager.areNotificationsEnabled()) {
             startServiceExecute();
         } else {
             verifyAndRequestNotificationPermission();
-        }
-    }
-
-    private void verifyAndRequestBootCompleted() {
-        if (checkSelfPermission(Manifest.permission.RECEIVE_BOOT_COMPLETED) != PackageManager.PERMISSION_GRANTED) {
-            if (shouldShowRequestPermissionRationale(Manifest.permission.RECEIVE_BOOT_COMPLETED)) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.request_boot_completed_title);
-                builder.setMessage(R.string.request_boot_completed_message);
-                builder.setPositiveButton(R.string.yes, (dialog, which) -> requestPermissions(new String[]{Manifest.permission.RECEIVE_BOOT_COMPLETED}, REQUEST_BOOT_COMPLETED_CODE));
-                builder.setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss());
-                builder.show();
-            } else {
-                requestPermissions(new String[]{Manifest.permission.RECEIVE_BOOT_COMPLETED}, REQUEST_BOOT_COMPLETED_CODE);
-            }
         }
     }
 
@@ -119,19 +106,10 @@ public class MainActivity extends AppCompatActivity {
                 builder.show();
             }
         }
-        if (requestCode == REQUEST_BOOT_COMPLETED_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Snackbar snack = Snackbar.make(this.findViewById(android.R.id.content), R.string.request_boot_completed_success, BaseTransientBottomBar.LENGTH_SHORT);
-                snack.show();
-            } else {
-                Snackbar snack = Snackbar.make(this.findViewById(android.R.id.content), R.string.request_boot_completed_failure, BaseTransientBottomBar.LENGTH_SHORT);
-                snack.show();
-            }
-        }
     }
 
     public void stopService(View view) {
-        Intent service = new Intent(this, NoBloodService.class);
-        stopService(service);
+        // TODO Finalizar notificação em segundo plano
+        WorkManager.getInstance(this.getApplicationContext()).cancelAllWork();
     }
 }

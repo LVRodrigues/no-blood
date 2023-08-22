@@ -15,15 +15,8 @@
     <string name="request_notification_message">Notification service is required to display health information on lock screen. It will also allow the use of the Emergency application. Do you want to allow the feature?</string>
     <string name="request_notification_failure">Service will not work on lock screen without Notification permission. Do you want to open settings?</string>
 
-    <string name="request_boot_completed_title">Auto Start Permission</string>
-    <string name="request_boot_completed_failure">The service will not restart when the device is turned on.</string>
-    <string name="request_boot_completed_success">Autostart permission granted.</string>
-    <string name="request_boot_completed_message">The service will restart automatically when the device is turned on. Do you want to allow the feature?</string>
-
     <string name="image_blood_transfusion_forbidden">Image Forbidden Blood Transfusion</string>
 
-    <string name="appwidget_text">No Blood</string>
-    <string name="add_widget">Add Information</string>
     <string name="app_widget_description">Health information.</string>
 
     <string name="yes">Yes</string>
